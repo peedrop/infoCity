@@ -1,0 +1,89 @@
+<app-bread-crumb
+  [items]="[{text: 'Colaborações', link: '/descartes'}, {text: title}]"
+></app-bread-crumb>
+
+<app-page-header
+  [page-title]="title"
+  button-text="<< Voltar"
+  button-link="/descartes"
+  button-class="btn-light"
+></app-page-header>
+  
+<div class="card">
+  <div class="card-header">
+    Informações sobre a colaboração
+  </div>
+
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <tbody>
+        <tr>
+          <td>Título</td>
+          <td>{{ descarte?.titulo }}</td>
+        </tr>
+        <tr>
+          <td>Descrição</td>
+          <td>{{ descarte?.descricao }}</td>
+        </tr>
+        <tr>
+          <td>Data Registro</td>
+          <!-- Erro desconhecido no formatarData no split -->
+          <td>{{descarte?.dataRegistro}} <!--{{ formatarData(resource.dataRegistro) }}--></td>
+        </tr>
+        <tr>
+          <td>Endereço</td>
+          <td>{{ descarte?.cidade.nome }} - {{ descarte?.cidade.estado.sigla }}, {{ descarte?.cep }}, {{ descarte?.rua }}, nº {{ descarte?.numero }} {{ descarte?.complemento }}</td>
+        </tr>
+        <tr>
+          <td>Usuário</td>
+          <td>{{ descarte?.usuario.nome }}</td>
+        </tr>
+        <tr>
+          <td>Tipo</td>
+          <td>{{ descarte?.tipo.nome }}</td>
+        </tr>
+        <tr>
+            <td>
+                Avaliação
+            </td>
+            <td>
+                <a><i id="b1" class="fa fa-star fa-2x" (click)='clickStar(1)' [ngStyle]="{'color': colorStar1}"></i></a>      
+                <a><i id="b2" class="fa fa-star fa-2x" (click)='clickStar(2)' [ngStyle]="{'color': colorStar2}"></i></a>      
+                <a><i id="b3" class="fa fa-star fa-2x" (click)='clickStar(3)' [ngStyle]="{'color': colorStar3}"></i></a>      
+                <a><i id="b4" class="fa fa-star fa-2x" (click)='clickStar(4)' [ngStyle]="{'color': colorStar4}"></i></a>      
+                <a><i id="b5" class="fa fa-star fa-2x" (click)='clickStar(5)' [ngStyle]="{'color': colorStar5}"></i></a>      
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Comentário
+            </td>
+            <td>
+            <form [formGroup]="resourceForm" (submit)="submitForm()">
+                <textarea type="text" class="form-control" id="comentario" formControlName="comentario"></textarea>
+                <app-form-field-error [form-control]="resourceForm.get('comentario')"></app-form-field-error>
+                <button (click)="excluir()" type="button" class="btn btn-danger btn-lg float-left mt-3">
+                  Excluir avaliação e comentário
+                </button>
+                <button [disabled]="submittingForm || resourceForm.invalid" type="submit" class="btn btn-primary btn-lg float-right mt-3">
+                    Salvar
+                  </button>
+            </form>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+    <app-server-error-messages [server-error-messages]="serverErrorMessages" ></app-server-error-messages>
+
+    
+</div>
+
+<!--
+{{comentario?.avaliacao}}
+{{comentario?.comentario}}
+<p><strong>form</strong></p>
+<pre>{{resourceForm.value | json}}</pre><br>
+
+<p><strong>comentario</strong></p>
+<pre>{{comentario | json}}</pre><br>
+-->

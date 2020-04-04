@@ -1,0 +1,68 @@
+<app-bread-crumb
+  [items]="[{text: 'Planejamentos', link: '/coletas'}, {text: pageTitle}]"
+></app-bread-crumb>
+
+<app-page-header
+  [page-title]="pageTitle"
+  button-text="<< Voltar"
+  button-link="/coletas"
+  button-class="btn-light"
+></app-page-header>
+  
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+    <div class="col-md-3">
+        Colaborações
+    </div>
+    <div class="col-md-6">
+    </div>
+    <div class="col-md-3">
+        <button type="button" (click)="finalizarPlanejamento()" class="btn btn-danger float-right">Finalizar Planejamento</button>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <div class="card border-0 rounded-0">
+      <div class="card-body">
+        <div class="table-responsive-md">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th width="25%">Título</th>
+                <th width="25%">Descrição</th>
+                <th width="25%">Data e Hora</th>
+                <th width="25%">Situação</th>
+                <th class="text-center" width="10%">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let descarte of resources">
+                <td>{{ descarte?.titulo}}</td>
+                <td>{{ descarte?.descricao}}</td>
+                <td>{{formatarData(descarte?.dataRegistro)}}</td>
+                <td>
+                  <strong [class.text-primary]="descarte.situacao.nome == 'Registrada'"
+                          [class.text-success]="descarte.situacao.nome == 'Aceita'"
+                          [class.text-warning]="descarte.situacao.nome == 'Planejada'"
+                          [class.text-danger]="descarte.situacao.nome == 'Executada'">
+                    {{ descarte?.situacao.nome }}
+                  </strong>
+                </td>
+                <td class="row d-flex justify-content-center">
+                  <a (click)="trocarSituacao(descarte.id, 3)" class="btn btn-sm btn-warning rounded-0 mr-2">
+                    <i class="fa fa-undo"></i>
+                  </a>
+                  <a (click)="trocarSituacao(descarte.id, 4)" class="btn btn-sm btn-success rounded-0">
+                    <i class="fa fa-check"></i>
+                  </a>
+                </td>
+              </tr>
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

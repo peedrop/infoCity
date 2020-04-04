@@ -1,0 +1,79 @@
+<app-bread-crumb
+  [items]="[{text: 'Colaborações Recebidas', link: '/colabRecebidas'}, {text: pageTitle}]"
+></app-bread-crumb>
+
+<app-page-header
+  [page-title]="pageTitle"
+  button-text="<< Voltar"
+  button-link="/colabRecebidas"
+  button-class="btn-light"
+></app-page-header>
+  
+<div class="card">
+  <div class="card-header">
+    Informações sobre a colaboração
+  </div>
+
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <tbody>
+        <tr>
+          <td>Título</td>
+          <td>{{ resource?.titulo }}</td>
+        </tr>
+        <tr>
+          <td>Descrição</td>
+          <td>{{ resource?.descricao }}</td>
+        </tr>
+        <tr>
+          <td>Data Registro</td>
+          <td *ngIf='resource.dataRegistro'>{{ formatarData(resource?.dataRegistro) }}</td>
+        </tr>
+        <tr>
+          <td>Endereço</td>
+          <td>{{ resource?.cidade?.nome }} - {{ resource?.cidade?.estado?.sigla }}, {{ resource?.cep }}, {{ resource?.rua }}, nº {{ resource?.numero }} {{ resource?.complemento }}</td>
+        </tr>
+        <tr>
+          <td>Usuário</td>
+          <td>{{ resource?.usuario?.nome }}</td>
+        </tr>
+        <tr>
+          <td>Tipo</td>
+          <td>{{ resource?.tipo?.nome }}</td>
+        </tr>
+        <tr>
+          <td>Comentário</td>
+          <td>{{ comentario?.comentario }}</td>
+        </tr>
+        <tr>
+          <td>Avaliação</td>
+          <td *ngIf="comentario?.avaliacao == 0"></td>
+          <td *ngIf="comentario?.avaliacao == 1">
+            <a><i class="fa fa-star fa-2x" style='color:rgb(172, 172, 17)'></i></a>
+          </td>
+          <td *ngIf="comentario?.avaliacao == 2">
+            <i class="fa fa-star fa-2x" style='color:rgb(172, 172, 17)'></i>
+            <i class="fa fa-star fa-2x" style='color:rgb(172, 172, 17)'></i>
+          </td>
+          <td *ngIf="comentario?.avaliacao == 3">
+            <i class="fa fa-star fa-2x" style='color:rgb(172, 172, 17)'></i>
+            <i class="fa fa-star fa-2x" style='color:rgb(172, 172, 17)'></i>
+            <i class="fa fa-star fa-2x" style='color:rgb(172, 172, 17)'></i>
+          </td>
+          <td *ngIf="comentario?.avaliacao == 4">
+            <i class="fa fa-star fa-2x" style='color:rgb(172, 172, 17)'></i>
+            <i class="fa fa-star fa-2x" style='color:rgb(172, 172, 17)'></i>
+            <i class="fa fa-star fa-2x" style='color:rgb(172, 172, 17)'></i>
+            <i class="fa fa-star fa-2x" style='color:rgb(172, 172, 17)'></i>
+          </td>
+          <td *ngIf="comentario?.avaliacao == 5">
+            <i class="fa fa-star fa-2x" style='color:rgb(172, 172, 17)'></i>
+            <i class="fa fa-star fa-2x" style='color:rgb(172, 172, 17)'></i>
+            <i class="fa fa-star fa-2x" style='color:rgb(172, 172, 17)'></i>
+            <i class="fa fa-star fa-2x" style='color:rgb(172, 172, 17)'></i>
+            <i class="fa fa-star fa-2x" style='color:rgb(172, 172, 17)'></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</div>

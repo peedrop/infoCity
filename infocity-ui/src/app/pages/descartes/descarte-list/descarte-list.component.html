@@ -1,0 +1,111 @@
+<app-bread-crumb
+  [items]="[{text: 'Colaborações'}]"
+></app-bread-crumb>
+
+<app-page-header
+  page-title="Colaborações"
+  button-text="+ Nova Colaboração"
+  button-link="new"
+  button-class="btn-success"
+></app-page-header>
+
+
+<div class="row mb-4">
+
+  <div class="col-md-12">
+    <div class="card border-0 rounded-0">
+      <div class="card-body">
+        <div class="table-responsive-md">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th width="15%">Título</th>
+                <th width="25%">Descrição</th>
+                <th width="20%">Data e Hora</th>
+                <th width="20%">Situação</th>
+                <th class="text-center" width="20%">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let descarte of resources">
+                <td>{{ descarte.titulo}}</td>
+                <td>{{ descarte.descricao}}</td>
+                <td>{{formatarData(descarte.dataRegistro)}}</td>
+                <td>
+                  <strong [class.text-primary]="descarte.situacao.nome == 'Registrada'"
+                          [class.text-success]="descarte.situacao.nome == 'Aceita'"
+                          [class.text-warning]="descarte.situacao.nome == 'Planejada'"
+                          [class.text-danger]="descarte.situacao.nome == 'Executada'">
+                    {{ descarte.situacao.nome }}
+                  </strong>
+                </td>
+                <td class="row d-flex justify-content-center">
+                  <a [routerLink]="[descarte.id, 'view']" class="btn btn-sm btn-outline-lightning rounded-0 mr-2 ">
+                    <i class="fa fa-search-plus"></i>
+                  </a>
+                  <a [routerLink]="[descarte.id, 'edit']" class="btn btn-sm btn-outline-lightning rounded-0 mr-2 ">
+                    <i class="far fa-edit"></i>
+                  </a>
+                  <a (click)="deleteResource(descarte)" class="btn btn-sm btn-outline-lightning rounded-0">
+                    <i class="far fa-trash-alt"></i>
+                  </a>
+                </td>
+              </tr>
+              
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!--
+
+<table class="table table-hover">
+  <thead>
+    <tr class="bg-primary text-light">
+      <th width="20%">Rua</th>
+      <th width="10%">Número</th>
+      <th width="10%">Bairro</th>
+      <th width="10%">Complemento</th>
+      <th width="10%">Cep</th>
+      <th width="10%">Cidade</th>
+      <th width="10%">Usuário</th>
+      <th class="text-center" width="20%">Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let endereco of resources">
+      <td>
+        {{endereco.rua}}
+      </td>
+      <td>
+        {{endereco.numero}}
+      </td>
+      <td>
+        {{endereco.bairro}}
+      </td>
+      <td>
+        {{endereco.complemento}}
+      </td>
+      <td>
+        {{endereco.cep}}
+      </td>
+      <td>
+        {{endereco.cidade.nome}}
+      </td>
+      <td>
+        {{endereco.usuario.nome}}
+      </td>
+      <td class="text-center">
+        <a [routerLink]="[endereco.id, 'edit']" class="btn btn-outline-info btn-sm mr-2">Editar</a>
+        <button (click)="deleteResource(endereco)" class="btn btn-outline-danger btn-sm">Excluir</button>
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+-->

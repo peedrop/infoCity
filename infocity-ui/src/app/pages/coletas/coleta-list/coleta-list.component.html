@@ -1,0 +1,60 @@
+<app-bread-crumb
+  [items]="[{text: 'Planejamentos'}]"
+></app-bread-crumb>
+
+<app-page-header
+  page-title="Planejamentos"
+  button-text="+ Novo Planejamento"
+  button-link="new"
+  button-class="btn-success"
+></app-page-header>
+
+<div class="row mb-4">
+
+    <div class="col-md-12">
+      <div class="card border-0 rounded-0">
+        <div class="card-body">
+          <div class="table-responsive-md">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th width="20%">Data</th>
+                  <th width="26%">Observação</th>
+                  <th width="20%">Situação</th>
+                  <th width="20%">Tipo</th>
+                  <th class="text-center" width="14%">Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let coleta of resources">
+                  <td>{{ formatarData(coleta.dataRegistro)  }}</td>
+                  <td>{{ coleta.observacao  }}</td>
+                  <td>
+                    <strong [class.text-success]="coleta.flagSituacao == 1"
+                            [class.text-danger]="coleta.flagSituacao == 2">
+                    {{ situacaoName(coleta.flagSituacao)  }}
+                    </strong>
+                  </td>
+                  <td>{{ coleta.tipo.nome  }}</td>
+                  <td class="row d-flex justify-content-center">
+                    <a [routerLink]="[coleta.id, 'view']" class="btn btn-sm btn-outline-lightning rounded-0 mr-2 ">
+                      <i class="fa fa-search-plus"></i>
+                    </a>
+                    <a [routerLink]="[coleta.id, 'edit']" class="btn btn-sm btn-outline-lightning rounded-0 mr-2 ">
+                      <i class="far fa-edit"></i>
+                    </a>
+                    <a (click)="deleteResource(coleta)" class="btn btn-sm btn-outline-lightning rounded-0">
+                      <i class="far fa-trash-alt"></i>
+                    </a>
+                  </td>
+                </tr>
+                
+              </tbody>
+            </table>
+          </div>
+  
+        </div>
+      </div>
+  
+    </div>
+  </div>

@@ -1,0 +1,91 @@
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark flex-fill bg-success pl-y-4">
+  <!-- <button class="sidebar-toggler ml-4" type="button">
+    <i class="fa fa-navicon"></i>
+  </button> -->
+  <!-- header -->
+  <div class="navbar-header pl-2 pr-2 ml-3 text-center" >
+    <a class="navbar-brand m-0 w-100" href="#">
+      <!-- <i class="fa fa-flash mr-1"></i> -->
+      <img src="./assets/img/marcador.png" alt="lightning logo" width="40px">
+      <span class="ml-1"><img src="./assets/img/infocity.png" class="mt-2" alt="lightning logo" width="150px"></span>
+    </a>
+  </div>
+  <!-- sidebar toggler -->
+  <div class="sidebar-toggler ml-auto mr-3" *ngIf="currentUser">
+    <a class="btn nav-link" (click)="toggleSidebar()" ><i class="fa fa-bars bg-light"></i></a>
+  </div>
+  <!-- right menu toggler -->
+  <div class="nav-toggler-right mr-4 d-md-none">
+    <button class="" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+      aria-controls="collapseBasic" >
+       <span class="fas fa-user"></span>
+    </button>
+    
+  </div>
+  <!-- left box -->
+  <ul class="navbar-nav flex-fill mt-1 align-items-center left-nav " *ngIf="currentUser">
+    <li class="nav-item navicon">
+      <a class="btn nav-link" (click)="toggleSidebarPin()"><i class="fa fa-bars bg-light"></i></a>
+    </li>
+    <!--
+    <li class="nav-item flex-fill">
+      <input class="form-control navbar-search" type="text" placeholder="Search . . .">
+    </li>-->
+  </ul>
+
+  <!-- right menu -->
+  <!--<a class="nav-item nav-link" (click)="logout()" *ngIf="currentUser">Logout</a>-->
+  <div class="collapse navbar-collapse right-nav" id="collapseBasic" [collapse]="isCollapsed" *ngIf="!currentUser">
+      <ul class="navbar-nav ">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="row col-md-12">
+            <label for="username" class="text-light ml-2">Email</label>
+            <input type="text" formControlName="username" class="ml-2 col-md-4">
+            <label for="senha" class="text-light ml-2">Senha</label>
+            <input type="password" formControlName="password" class="ml-2 col-md-4">
+            <button [disabled]="loading" class="ml-2 btn btn-light" type="submit" value="Entrar">Entrar</button>
+            <img *ngIf="loading" class="pl-3 mr-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+          </div>        
+        </form>
+      </ul>
+  </div>
+  <div class="collapse navbar-collapse right-nav" id="collapseBasic" [collapse]="isCollapsed" *ngIf="currentUser">
+    <ul class="navbar-nav ">
+      <!--
+      <li class="nav-item">
+        <a class="btn nav-link">
+          <i class="far fa-bell"></i>
+          <span class="link-text">Alerts</span>
+           <span class="badge badge-pill ba dge-danger">3</span> 
+          <span class="nav-alert notifications"></span>
+        </a>
+      </li>
+     
+      <li class="nav-item">
+        <a class="btn nav-link">
+          <i class="far fa-envelope"></i>
+          <span class="link-text">Messages</span>
+           <span class="badge badge-pill badge-success">5</span> 
+          <span class="nav-alert messages"></span>
+        </a>
+      </li>
+      -->
+      
+      <li class="nav-item">
+        <a class="btn nav-link" routerLink="/perfil">
+          <i class="far fa-user bg-light"></i>
+          <span class="link-text">Perfil</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="btn nav-link" (click)="logout()">
+          <i class="fa fa-power-off bg-light" ></i>
+          <span class="link-text">Sair</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+
+</nav>

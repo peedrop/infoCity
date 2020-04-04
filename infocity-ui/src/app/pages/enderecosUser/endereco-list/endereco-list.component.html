@@ -1,0 +1,49 @@
+<app-bread-crumb
+  [items]="[{text: 'Endereços'}]"
+></app-bread-crumb>
+
+<app-page-header
+  page-title="Endereços"
+  button-text="+ Novo Endereço"
+  button-link="new"
+  button-class="btn-success"
+></app-page-header>
+
+<div class="row mb-4">
+  <div class="col-md-12">
+    <div class="card border-0 rounded-0">
+      <div class="card-body">
+        <div class="table-responsive-md">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th width="20%">Cidade</th>
+                <th width="20%">Rua</th>
+                <th width="50%">Endereço</th>
+                <th class="text-center" width="10%">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let endereco of resources">
+                <td>{{endereco.cidade.nome}} - {{endereco.cidade.estado.sigla}}</td>
+                <td>{{endereco.rua}}</td>
+                <td>Cep: {{endereco.cep}}, Bairro: {{endereco.bairro}}, Nº: {{endereco.numero}}, Complemento: {{endereco.complemento}}</td>
+                <td class="row d-flex justify-content-center">
+                  <a [routerLink]="[endereco.id, 'edit']" class="btn btn-sm btn-outline-lightning rounded-0 mr-2 ">
+                    <i class="far fa-edit"></i>
+                  </a>
+                  <a (click)="deleteResource(endereco)" class="btn btn-sm btn-outline-lightning rounded-0">
+                    <i class="far fa-trash-alt"></i>
+                  </a>
+                </td>
+              </tr>
+              
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

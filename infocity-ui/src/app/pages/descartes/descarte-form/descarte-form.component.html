@@ -1,0 +1,119 @@
+<app-bread-crumb
+  [items]="[{text: 'Colaborações', link: '/descartes'}, {text: pageTitle}]"
+></app-bread-crumb>
+  
+<app-page-header
+  [page-title]="pageTitle"
+  button-text="<< Voltar"
+  button-link="/descartes"
+  button-class="btn-light"
+></app-page-header>
+  
+<form [formGroup]="resourceForm" (submit)="submitForm()">
+  
+    <div class="card">
+      <div class="card-header">
+        Informações sobre a Colaboração
+      </div>
+  
+      <div class="card-body">
+        <div class="form-row">
+          <div class="form-group col-md-5">
+            <label for="titulo">Título</label>
+            <input type="text" class="form-control" id="titulo" formControlName="titulo">
+            <app-form-field-error [form-control]="resourceForm.get('titulo')"></app-form-field-error>
+          </div>
+          <div class="form-group col-md-1"></div>
+          <div class="form-group col-md-6">
+            <div class="form-row">
+              <input type="hidden" class="form-control" id="idTipo" formControlName="idTipo">
+              <app-form-field-error [form-control]="resourceForm.get('idTipo')"></app-form-field-error>
+              <label for="tipo"><strong>Clique em o que deseja colaborar:</strong>{{ tipoColabSelect }} </label>
+            </div>
+            <div class="form-row">
+              <img (click)="trocarTipoColab(1)" src="./assets/img/coleta.png" title="Coleta seletiva" alt="Coleta seletiva" class="tipoColaboracao">
+              <img (click)="trocarTipoColab(2)" src="./assets/img/dengue.png" title="Foco de dengue" alt="Foco de dengue" class="tipoColaboracao ml-4">
+              <img (click)="trocarTipoColab(3)" src="./assets/img/buraco.png" title="Buraco na rua" alt="Buraco na rua" class="tipoColaboracao ml-4">
+              <img (click)="trocarTipoColab(4)" src="./assets/img/semaforo.png" title="Semáforo com defeito" alt="Semáforo com defeito" class="tipoColaboracao ml-4">
+              <img (click)="trocarTipoColab(5)" src="./assets/img/iluminacao.png" title="Iluminação pública" alt="Iluminação pública" class="tipoColaboracao ml-4">
+              <img (click)="trocarTipoColab(6)" src="./assets/img/lixorua.png" title="Lixo na rua" alt="Lixo na rua" class="tipoColaboracao ml-4">
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          
+          <!--
+          <div class="form-group col-md-3">
+            <label for="idTipo">Tipo</label>
+            <select name="idTipo" id="idTipo" formControlName="idTipo" class="form-control">
+              <option *ngFor="let tipo of tipos" [value]="tipo.id">{{ tipo.nome }}</option>
+            </select>
+            <app-form-field-error [form-control]="resourceForm.get('idCidade')"></app-form-field-error>
+          </div>-->
+          <div class="form-group col-md-12">
+            <label for="descricao">Descrição</label>
+            <textarea type="text" class="form-control" id="descricao" formControlName="descricao"></textarea>
+            <app-form-field-error [form-control]="resourceForm.get('descricao')"></app-form-field-error>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <label for="idEndereco"><strong>Endereços cadastrados:</strong> </label>
+            <select name="idEndereco" id="idEndereco" class="form-control form-control-lg" (blur)="completarEnd(endereco)">
+              <option disabled [value]="0">Selecione um endereço cadastrado ou cadastre abaixo</option>
+              <option *ngFor="let endereco of enderecos" [value]="endereco.id">
+                {{endereco.rua}}, {{endereco.numero}} - {{endereco.bairro}}, {{endereco.cidade.nome}} - {{endereco.cidade.estado.sigla}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <label><strong>Novo endereço:</strong> </label>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="idCidade">Cidade</label>
+            <select name="idCidade" id="idCidade" formControlName="idCidade" class="form-control">
+              <option *ngFor="let cidade of cidades" [value]="cidade.id">{{ cidade.nome }} - {{ cidade.estado.sigla }}</option>
+            </select>
+            <app-form-field-error [form-control]="resourceForm.get('idCidade')"></app-form-field-error>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="cep">Cep</label>
+            <input [imask]="imaskCep" type="text" class="form-control" id="cep" formControlName="cep" (blur)="consultaCep()">
+            <app-form-field-error [form-control]="resourceForm.get('cep')"></app-form-field-error>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="bairro">Bairro</label>
+            <input type="text" class="form-control" id="bairro" formControlName="bairro">
+            <app-form-field-error [form-control]="resourceForm.get('bairro')"></app-form-field-error>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="rua">Rua</label>
+            <input type="text" class="form-control" id="rua" formControlName="rua">
+            <app-form-field-error [form-control]="resourceForm.get('rua')"></app-form-field-error>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="numero">Número</label>
+            <input type="text" class="form-control" id="numero" formControlName="numero">
+            <app-form-field-error [form-control]="resourceForm.get('numero')"></app-form-field-error>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="complemento">Complemento</label>
+            <input type="text" class="form-control" id="complemento" formControlName="complemento">
+            <app-form-field-error [form-control]="resourceForm.get('complemento')"></app-form-field-error>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+    
+    <app-server-error-messages [server-error-messages]="serverErrorMessages" ></app-server-error-messages>
+
+    <button [disabled]="submittingForm || resourceForm.invalid" type="submit" class="btn btn-primary btn-lg float-right mt-3">
+      Salvar
+    </button>
+  
+  </form>
+
+  <!--<pre>{{resourceForm.value | json}}</pre>-->

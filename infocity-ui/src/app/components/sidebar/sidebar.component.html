@@ -1,0 +1,121 @@
+<aside class="sidebar shadow-sm" *ngIf="currentUser">
+
+  <div class="sidebar-profile d-flex flex-column justify-content-center pt-5 pb-3">
+    <div class="picture-wrapper mb-4">
+      <div class="user-picture m-auto">
+        <img src="./assets/img/user.jpg" class="img-fluid" alt="">
+      </div>
+    </div>
+    <div class="profile-details text-center pb-4">
+      <p class="mb-0 text-uppercase name">{{currentUser.nome}}</p>
+      <small class="text-uppercase role">{{currentUser.perfil.nome}}</small>
+    </div>
+  </div>
+  <div class="sidebar-search pt-1 pb-1 pl-3 pr-3">
+    <input type="search" class="form-control rounded-pill" name="search" placeholder="Search ...">
+  </div>
+  <nav class="sidebar-menu pt-3 pb-3">
+    <div class="menu-header mt-3 mb-2">
+      Páginas
+    </div>
+    <ul class="menu-items">
+     
+      <li>
+        <a href="#" routerLink="/sobre" routerLinkActive="active">
+          <i class="fa fa-tv"></i>
+          <span>Página Inicial</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" routerLink="/perfil" routerLinkActive="active">
+          <i class="fas fa-user"></i>
+          <span>Meus dados</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" routerLink="/perfil2" routerLinkActive="active"
+        *ngIf="currentUser.perfil.nome == 'Admin'">
+          <i class="fas fa-user"></i>
+          <span>Perfis</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" routerLink="/tipo" routerLinkActive="active"
+        *ngIf="currentUser.perfil.nome == 'Admin'">
+          <i class="fas fa-user"></i>
+          <span>Tipos</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" routerLink="/enderecosUser" routerLinkActive="active"
+        *ngIf="currentUser.perfil.nome == 'Colaborador'">
+          <i class="fa fa-map-marker"></i>
+          <span>Endereços</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" routerLink="/descartes" routerLinkActive="active"
+         *ngIf="currentUser.perfil.nome == 'Colaborador'">
+          <i class="fa fa-bullhorn"></i>
+          <span>Colaborações</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" routerLink="/colabRecebidas" routerLinkActive="active"
+         *ngIf="currentUser.perfil.nome == 'Corporação'">
+          <i class="fa fa-envelope"></i>
+          <span>Colaborações</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" routerLink="/coletas" routerLinkActive="active"
+        *ngIf="currentUser.perfil.nome == 'Corporação'">
+          <i class="fa fa-list"></i>
+          <span>Planejamento</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" routerLink="/usuarios" routerLinkActive="active"
+        *ngIf="currentUser.perfil.nome == 'Admin'">
+          <i class="fas fa-gem"></i>
+          <span>Usúarios</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" routerLink="/enderecos" routerLinkActive="active"
+        *ngIf="currentUser.perfil.nome == 'Admin'">
+          <i class="fa fa-map-marker"></i>
+          <span>Endereços</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" routerLink="/cidades" routerLinkActive="active"
+        *ngIf="currentUser.perfil.nome == 'Admin'">
+          <i class="fa fa-align-center"></i>
+          <span>Cidades</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" routerLink="/estados" routerLinkActive="active"
+        *ngIf="currentUser.perfil.nome == 'Admin'">
+          <i class="fa fa-globe"></i>
+          <span>Estados</span>
+        </a>
+      </li>
+      <!--
+      <li>
+        <a href="#" routerLink="/notifications" routerLinkActive="active">
+          <i class="fas fa-bell"></i>
+          <span>Notifications</span>
+        </a>
+      </li>-->
+    </ul>
+    <div class="menu-header mt-4 mb-4">
+      
+    </div>
+    <div class="view-source mb-3">
+      <a target="_blank" (click)="logout()" class="btn btn-block btn-lightning rounded-0">Sair</a>
+      
+    </div>   
+  </nav>
+</aside>

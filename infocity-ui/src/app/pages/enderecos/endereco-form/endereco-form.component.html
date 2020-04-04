@@ -1,0 +1,79 @@
+<app-bread-crumb
+  [items]="[{text: 'Endereços', link: '/enderecos'}, {text: pageTitle}]"
+></app-bread-crumb>
+  
+<app-page-header
+  [page-title]="pageTitle"
+  button-text="<< Voltar"
+  button-link="/enderecos"
+  button-class="btn-light"
+></app-page-header>
+  
+  <form [formGroup]="resourceForm" (submit)="submitForm()">
+  
+    <div class="card">
+      <div class="card-header">
+        Informações sobre o Endereço
+      </div>
+  
+      <div class="card-body">
+        <div class="form-row">
+
+          <div class="form-group col-md-4">
+            <label for="idUsuario">Usuário</label>
+            <select name="idUsuario" id="idUsuario" formControlName="idUsuario" class="form-control">
+              <option *ngFor="let usuario of usuarios" [value]="usuario.id">{{ usuario.nome }}</option>
+            </select>
+            <app-form-field-error [form-control]="resourceForm.get('idUsuario')"></app-form-field-error>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="idCidade">Cidade</label>
+            <select name="idCidade" id="idCidade" formControlName="idCidade" class="form-control">
+              <option *ngFor="let cidade of cidades" [value]="cidade.id">{{ cidade.nome }} - {{ cidade.estado.sigla }}</option>
+            </select>
+            <app-form-field-error [form-control]="resourceForm.get('idCidade')"></app-form-field-error>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="cep">Cep</label>
+            <input [imask]="imaskCep" type="text" class="form-control" id="cep" formControlName="cep" (blur)="consultaCep()">
+            <app-form-field-error [form-control]="resourceForm.get('cep')"></app-form-field-error>
+          </div>
+
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="bairro">Bairro</label>
+            <input type="text" class="form-control" id="bairro" formControlName="bairro">
+            <app-form-field-error [form-control]="resourceForm.get('bairro')"></app-form-field-error>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="rua">Rua</label>
+            <input type="text" class="form-control" id="rua" formControlName="rua">
+            <app-form-field-error [form-control]="resourceForm.get('rua')"></app-form-field-error>
+          </div>
+
+          <div class="form-group col-md-3">
+            <label for="numero">Número</label>
+            <input type="text" class="form-control" id="numero" formControlName="numero">
+            <app-form-field-error [form-control]="resourceForm.get('numero')"></app-form-field-error>
+          </div>
+
+          <div class="form-group col-md-3">
+            <label for="complemento">Complemento</label>
+            <input type="text" class="form-control" id="complemento" formControlName="complemento">
+            <app-form-field-error [form-control]="resourceForm.get('complemento')"></app-form-field-error>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+    
+    <app-server-error-messages [server-error-messages]="serverErrorMessages" ></app-server-error-messages>
+
+    <button [disabled]="submittingForm || resourceForm.invalid" type="submit" class="btn btn-primary btn-lg float-right mt-3">
+      Salvar
+    </button>
+  
+  </form>
+
+  <!--<pre>{{resourceForm.value | json}}</pre>-->

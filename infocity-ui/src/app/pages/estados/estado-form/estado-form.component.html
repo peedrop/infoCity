@@ -1,0 +1,42 @@
+<app-bread-crumb
+  [items]="[{text: 'Estados', link: '/estados'}, {text: pageTitle}]"
+></app-bread-crumb>
+
+<app-page-header
+  [page-title]="pageTitle"
+  button-text="<< Voltar"
+  button-link="/estados"
+  button-class="btn-light"
+></app-page-header>
+  
+  <form [formGroup]="resourceForm" (submit)="submitForm()">
+  
+    <div class="card">
+      <div class="card-header">
+        Informações sobre o estado
+      </div>
+  
+      <div class="card-body">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="nome">Nome</label>
+            <input type="text" class="form-control" id="nome" formControlName="nome">
+            <app-form-field-error [form-control]="resourceForm.get('nome')"></app-form-field-error>
+          </div>
+  
+          <div class="form-group col-md-6">
+            <label for="sigla">Sigla</label>
+            <input type="text" class="form-control" id="sigla" formControlName="sigla">
+            <app-form-field-error [form-control]="resourceForm.get('sigla')"></app-form-field-error>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <app-server-error-messages [server-error-messages]="serverErrorMessages" ></app-server-error-messages>
+
+    <button [disabled]="submittingForm || resourceForm.invalid" type="submit" class="btn btn-primary btn-lg float-right mt-3">
+      Salvar
+    </button>
+  
+  </form> 

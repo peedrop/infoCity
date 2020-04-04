@@ -1,0 +1,83 @@
+<app-bread-crumb
+  [items]="[{text: 'Colaborações'}]"
+></app-bread-crumb>
+
+<app-page-header
+  page-title="Colaborações"
+></app-page-header>
+
+
+<div class="row mb-4">
+
+  <div class="col-md-12">
+    <div class="mb-2">
+      <button (click)="mudarFiltro(5)" class="btn btn-danger btn-lg mt-3 mr-2">
+        Arquivadas
+      </button>
+      <i class="fas fa-arrow-alt-circle-left fa-lg mr-2"></i>
+      <button (click)="mudarFiltro(1)" class="btn btn-primary btn-lg mt-3 mr-2">
+        Registradas
+      </button>
+      <i class="fas fa-arrow-alt-circle-right fa-lg mr-2"></i>
+      <button (click)="mudarFiltro(2)" class="btn btn-success btn-lg mt-3">
+        Aceitas
+      </button>
+      <div class="float-right">
+        <button (click)="mudarFiltro(3)" class="btn btn-warning btn-lg mt-3">
+          Planejadas
+        </button>
+        <i class="fas fa-arrow-alt-circle-right fa-lg ml-2 mr-2"></i>
+        <button (click)="mudarFiltro(4)" class="btn btn-secondary btn-lg mt-3">
+          Executadas
+        </button>
+      </div>
+    </div>
+    <div class="card border-0 rounded-0">
+      <div class="card-body">
+        <div class="table-responsive-md">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th width="20%">Título</th>
+                <th width="25%">Descrição</th>
+                <th width="20%">Data e Hora</th>
+                <th width="20%">Tipo</th>
+                <th class="text-center" width="15%">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let descarte of resources">
+                <td>{{ descarte.titulo}}</td>
+                <td>{{ descarte.descricao}}</td>
+                <td>{{formatarData(descarte.dataRegistro)}}</td>
+                <td>{{ descarte.tipo.nome}}</td>
+                <td class="row d-flex justify-content-center" *ngIf="descarte.situacao.nome == 'Registrada'"> 
+                  <a (click)="trocarSituacao(descarte, 5)" class="btn btn-sm btn-outline-lightning rounded-0 mr-2 ">
+                    <i class="fa fa-times"></i>
+                  </a>
+                  <a [routerLink]="[descarte.id, 'edit']" class="btn btn-sm btn-outline-lightning rounded-0 mr-2 ">
+                    <i class="fa fa-search-plus"></i>
+                  </a>
+                  <a (click)="trocarSituacao(descarte, 2)" class="btn btn-sm btn-outline-lightning rounded-0">
+                    <i class="fa fa-check"></i>
+                  </a>
+                </td>
+                <td class="row d-flex justify-content-center" *ngIf="descarte.situacao.nome != 'Registrada'"> 
+                  <a [routerLink]="[descarte.id, 'edit']" class="btn btn-sm btn-outline-lightning rounded-0 mr-2 ">
+                    <i class="fa fa-search-plus"></i>
+                  </a>
+                  <a (click)="trocarSituacao(descarte, 1)" class="btn btn-sm btn-outline-lightning rounded-0">
+                    <i class="fa fa-undo"></i>
+                  </a>
+                </td>
+              </tr>
+              
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

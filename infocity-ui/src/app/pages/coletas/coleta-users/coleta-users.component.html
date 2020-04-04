@@ -1,0 +1,86 @@
+<nav class="mb-5">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/sobre">Página Inicial</a></li>
+    <li class="breadcrumb-item"><a routerLink="/coletas">Planejamentos</a></li>
+    <li class="breadcrumb-item"><a routerLink="/coletas/{{idPlanejamento}}/edit">Planejamento da solução</a></li> 
+    <li class="breadcrumb-item"><a routerLink="/coletas/{{idPlanejamento}}/{{idTipoPlanejamento}}/map/edit">Mapa da rota</a></li> 
+    <li class="breadcrumb-item active">Responsáveis</li>
+  </ol>
+</nav>
+  
+<div class="row mb-4">
+  <div class="col-md">
+    <h1 class="h2 border-left pl-2">
+      Funcionários responsáveis {{idPlanejamento}}
+    </h1>
+  </div>
+  <div class="col-md">
+    <a routerLink="/coletas/{{idPlanejamento}}/{{idTipoPlanejamento}}/map/edit" class="btn btn-light float-right">
+      << Voltar
+    </a>
+  </div>
+</div>
+
+  
+   
+<div class="card col-md-12 mt-3">
+  <div class="card-header">
+    Funcionários
+  </div>
+  <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover" style="margin-bottom: 0">
+            <thead>
+              <tr>
+                <th width="10%" class="text-center">
+                  <small>Todos</small><br>
+                  <input type="checkbox" (click)="selecionarTodos()" [checked]="todosSelecionados">
+                </th>
+                <th width="20%">Nome</th>
+                <th width="45%">Email</th>
+                <th width="20%">Data de nascimento</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let usuario1 of usuariosEdit">
+                <td class="text-center">
+                  <input type="checkbox" (click)="adicionarUsuario(usuario1.id)" [checked]="verificarExiste(usuario1.id)">
+                </td>
+                <td>{{usuario1.nome}}</td>
+                <td>{{usuario1.email}}</td>
+                <td>{{usuario1.dataNascimento}}</td>
+              </tr>
+                <tr *ngFor="let usuario of usuarios">
+                  <td class="text-center">
+                    <input type="checkbox" (click)="adicionarUsuario(usuario.id)" [checked]="verificarExiste(usuario.id)">
+                  </td>
+                  <td>{{usuario.nome}}</td>
+                  <td>{{usuario.email}}</td>
+                  <td>{{usuario.dataNascimento}}</td>
+                </tr>
+            </tbody>
+        </table>
+      </div>
+  </div>
+</div>
+<div class="text-right">
+  <button (click)="createPlanejamentoUsuario()" type="submit" class="col-md-2 btn btn-primary btn-lg mt-3 mb-3">
+    Salvar
+  </button>
+</div>
+<!--
+<div class="alert alert-danger mt-4" *ngIf="serverErrorMessages">
+  <strong>Erro no servidor:</strong>
+  <ul>
+    <li *ngFor="let error of serverErrorMessages">{{error}}</li>
+  </ul>
+</div>
+
+  <p><strong>id dos usuarios add</strong></p>
+  <pre>{{usuariosAdicionados | json}}</pre><br>
+
+  <p><strong>usuarios edit</strong></p>
+  <pre>{{usuariosEdit | json}}</pre>
+
+-->
+  

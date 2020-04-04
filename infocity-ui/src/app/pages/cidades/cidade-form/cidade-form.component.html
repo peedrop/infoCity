@@ -1,0 +1,56 @@
+<app-bread-crumb
+  [items]="[{text: 'Cidades', link: '/cidades'}, {text: pageTitle}]"
+></app-bread-crumb>
+  
+<app-page-header
+  [page-title]="pageTitle"
+  button-text="<< Voltar"
+  button-link="/cidades"
+  button-class="btn-light"
+></app-page-header>
+  
+  <form [formGroup]="resourceForm" (submit)="submitForm()">
+  
+    <div class="card">
+      <div class="card-header">
+        Informações sobre a Cidade
+      </div>
+  
+      <div class="card-body">
+        <div class="form-row">
+          
+          <!-- titulo -->
+          <div class="form-group col-md-6">
+            <label for="nome">Nome</label>
+            <input type="text" class="form-control" id="nome" formControlName="nome">
+            
+            <app-form-field-error [form-control]="resourceForm.get('nome')"></app-form-field-error>
+
+          </div>
+
+          <!-- categoryId -->
+          <div class="form-group col-md-6">
+              <label for="idEstado">Estado</label>
+    
+              <select name="idEstado" id="idEstado" formControlName="idEstado" class="form-control">
+                <option *ngFor="let estado of estados" [value]="estado.id">{{ estado.nome }}</option>
+              </select>
+    
+              <app-form-field-error [form-control]="resourceForm.get('idEstado')"></app-form-field-error>
+
+            </div>
+  
+        </div>
+  
+      </div>
+    </div>
+    
+    <app-server-error-messages [server-error-messages]="serverErrorMessages" ></app-server-error-messages>
+
+    <button [disabled]="submittingForm || resourceForm.invalid" type="submit" class="btn btn-primary btn-lg float-right mt-3">
+      Salvar
+    </button>
+  
+  </form>
+
+  <!--<pre>{{resourceForm.value | json}}</pre>-->

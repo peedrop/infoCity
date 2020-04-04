@@ -1,0 +1,125 @@
+<nav class="mb-5">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/sobre">Página Inicial</a></li>
+    <li class="breadcrumb-item"><a routerLink="/coletas">Planejamentos</a></li>
+    <li class="breadcrumb-item"><a routerLink="/coletas/{{idPlanejamento}}/edit">Planejamento da solução</a></li> 
+    <li class="breadcrumb-item active">Mapa da rota</li>
+  </ol>
+</nav>
+  
+<div class="row mb-4">
+  <div class="col-md">
+    <h1 class="h2 border-left pl-2">
+      Mapa da rota {{idPlanejamento}}
+    </h1>
+  </div>
+  <div class="col-md">
+    <a routerLink="/coletas/{{idPlanejamento}}/edit" class="btn btn-light float-right">
+      << Voltar
+    </a>
+  </div>
+</div>
+  
+   
+    <div class="card col-md-12 mt-3">
+      <div class="card-header">
+        Colaborações
+      </div>
+      <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped table-hover" style="margin-bottom: 0">
+                <thead>
+                  <tr>
+                    <th width="10%" class="text-center">
+                      <small>Todos</small><br>
+                      <input type="checkbox" (click)="selecionarTodos()" [checked]="todosSelecionados">
+                    </th>
+                    <th width="20%">Título</th>
+                    <th width="45%">Local</th>
+                    <th width="20%">Data e Hora</th>
+                    <th width="15%"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                  <tr *ngFor="let descarte1 of descartesEdit">
+                    <td class="text-center">
+                      <input type="checkbox" (click)="adicionarDescarte(descarte1.id)" [checked]="verificarExiste(descarte1.id)">
+                    </td>
+                    <td>{{descarte1.titulo}}</td>
+                    <td>{{descarte1.rua}}, {{descarte1.numero}} - {{descarte1.bairro}}</td>
+                    <!--<td>{{formatarData(descarte1.dataRegistro)}}</td>-->
+                    <td>{{descarte1.dataRegistro}}</td>
+                  </tr>
+                  <tr *ngFor="let descarte of descartes">
+                      <td class="text-center">
+                        <input type="checkbox" (click)="adicionarDescarte(descarte.id)" [checked]="verificarExiste(descarte.id)">
+                      </td>
+                      <td>{{descarte.titulo}}</td>
+                      <td>{{descarte.rua}}, {{descarte.numero}} - {{descarte.bairro}}</td>
+                      <!--<td>{{formatarData(descarte.dataRegistro)}}</td>-->
+                      <td>{{descarte.dataRegistro}}</td>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
+      </div>
+    </div>
+    <div class="text-right">
+      <button (click)="createColetaDescarte()" type="submit" class="col-md-2 btn btn-primary btn-lg mt-3 mb-3">
+        Próximo
+      </button>
+    </div>
+    <div class="card col-md-12">
+        <div class="card-header">
+          <div class="row">
+          <div class="col-md-3">
+              Mapa dos descartes
+          </div>
+          <div class="col-md-6">
+          </div>
+          <div class="col-md-3">
+              <button type="button" (click)="atualizarMarcadores()" class="btn btn-danger float-right">Atualizar Mapa</button>
+          </div>
+        </div>
+        </div>
+        <div class="card-body">
+            <agm-map [latitude]="lat" [zoom]="zoom" [longitude]="lng">
+                <agm-direction [origin]="partida" [destination]="chegada" [waypoints]="waypoints"></agm-direction>
+                
+                <!--<agm-marker *ngFor="let marcador of marcadores" [latitude]="marcador.latitude" [longitude]="marcador.longitude"></agm-marker>-->
+               
+              </agm-map>
+        </div>
+    </div>
+  
+    <div class="alert alert-danger mt-4" *ngIf="serverErrorMessages">
+      <strong>Erro no servidor:</strong>
+      <ul>
+        <li *ngFor="let error of serverErrorMessages">{{error}}</li>
+      </ul>
+    </div>
+
+    
+  <!--
+  <p><strong>id dos descartes add</strong></p>
+  <pre>{{descartesAdicionados | json}}</pre><br>
+   
+  <p><strong>Descartes dessa Coleta</strong></p>
+  <pre>{{descartesEdit | json}}</pre>
+
+
+  <p><strong>marcadores</strong></p>
+  <pre>{{marcadores | json}}</pre>
+
+  <p><strong>waypoints</strong></p>
+  <pre>{{waypoints | json}}</pre>
+
+  <p><strong>form</strong></p>
+  <pre>{{resourceForm.value | json}}</pre><br>
+
+  
+ 
+ -->
+
+  

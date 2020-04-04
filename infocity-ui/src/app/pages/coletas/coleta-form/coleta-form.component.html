@@ -1,0 +1,73 @@
+<app-bread-crumb
+  [items]="[{text: 'Planejamentos', link: '/coletas'}, {text: pageTitle}]"
+></app-bread-crumb>
+  
+<app-page-header
+  [page-title]="pageTitle"
+  button-text="<< Voltar"
+  button-link="/coletas"
+  button-class="btn-light"
+></app-page-header>
+  
+  <form [formGroup]="resourceForm" (submit)="submitForm()">
+
+  
+ 
+    <div class="card col-md-12 mt-3">
+      <div class="card-header">
+        Informações sobre o Planejamento
+      </div>
+  
+      <div class="card-body">
+        <div class="form-row">
+          <!-- observacao -->
+          <div class="form-group col-md-12">
+            <label for="observacao">Observação</label>
+            <textarea type="text" class="form-control" id="observacao" formControlName="observacao"></textarea>
+            <app-form-field-error [form-control]="resourceForm.get('observacao')"></app-form-field-error>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="idTipo">Tipo</label>
+            <select name="idTipo" id="idTipo" formControlName="idTipo" class="form-control">
+              <option selected disabled>Selecione um tipo de problema</option>
+              <option *ngFor="let tipo of tipos" [value]="tipo.id">{{ tipo.nome }}</option>
+            </select>
+            <app-form-field-error [form-control]="resourceForm.get('idTipo')"></app-form-field-error>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="dataRegistro">Data</label>
+            <input type="date" class="form-control" id="dataRegistro" formControlName="dataRegistro">
+            <app-form-field-error [form-control]="resourceForm.get('dataRegistro')"></app-form-field-error>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="horaInicio">Horário de Início</label>
+            <input type="time" class="form-control" id="horaInicio" formControlName="horaInicio">
+            <app-form-field-error [form-control]="resourceForm.get('horaInicio')"></app-form-field-error>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="horaTermino">Horário de Término</label>
+            <input type="time" class="form-control" id="horaTermino" formControlName="horaTermino">
+            <app-form-field-error [form-control]="resourceForm.get('horaTermino')"></app-form-field-error>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="distancia">Distância aproximada</label>
+            <input type="text" class="form-control" id="distancia" formControlName="distancia">
+            <app-form-field-error [form-control]="resourceForm.get('distancia')"></app-form-field-error>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+  
+    <div class="text-right">
+    <button [disabled]="submittingForm || resourceForm.invalid" type="submit" class="col-md-2 btn btn-primary btn-lg mt-3 mb-3">
+      Próximo
+    </button>
+  </div>
+
+    <app-server-error-messages [server-error-messages]="serverErrorMessages" ></app-server-error-messages>
+
+  </form>
