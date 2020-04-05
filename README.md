@@ -22,11 +22,13 @@ Projeto de Iniciação Científica Cefet-Mg campus Timóteo
   -> Verificar se instalou (composer --version) <br> <br>
   
 <strong>5º PASSO:</strong> Criar o banco de dados que esta em "arquivos > scriptBKP.sql"   <br>
-  -> Obs: nome do banco: infocity2 <br><br>
+  -> Obs: nome do banco: infocity2 <br>
+  -> Alterar senha do banco no arquivo que esta em " infoCity-api > env.php " <br> <br>
  
 <strong>6º PASSO:</strong> Abrir o cmd da pasta "infocity-ui" <br>
   -> Executar comando "npm install" <br>
-  -> Depois executar comando "ng serve --open" <br><br>
+  -> Depois executar comando "ng serve --open" <br>
+  -> Se der erro quando executar rode o comando " npm install node-sass " depois " ng serve --open " novamente <br> <br>
  
 <strong>7º PASSO:</strong> Abrir o cmd da pasta "infocity-api"  <br>
   -> Executar comando "php -S localhost:8080"  <br>
