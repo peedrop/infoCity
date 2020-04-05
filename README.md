@@ -12,14 +12,14 @@ Projeto de Iniciação Científica Cefet-Mg campus Timóteo
   -> Executar no cmd: " npm install -g @angular/cli "  <br> 
   -> Verificar se instalou (ng --version)  <br> <br> 
   
-<strong>3º PASSO:</strong> Instalar Composer  <br>
+<strong>3º PASSO:</strong> Instalar XAMPP <br>
+  -> https://www.apachefriends.org/pt_br/download.html   <br>
+  -> Ligar o XAMPP  <br><br>
+
+<strong>4º PASSO:</strong> Instalar Composer  <br>
   -> https://getcomposer.org/download/   <br>
   -> Clicar em "Composer-Setup.exe"  <br>
   -> Verificar se instalou (composer --version) <br> <br>
-  
-<strong>4º PASSO:</strong> Instalar XAMPP <br>
-  -> https://www.apachefriends.org/pt_br/download.html   <br>
-  -> Ligar o XAMPP  <br><br>
   
 <strong>5º PASSO:</strong> Criar o banco de dados que esta em "arquivos > scriptBKP.sql"   <br>
   -> Obs: nome do banco: infocity2 <br><br>
